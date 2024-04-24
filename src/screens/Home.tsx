@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import { StatusBar } from 'react-native';
 import Title from '../components/Title';
 import Subtitle from '../components/Subtitle';
+import Separator from '../components/Separator';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
           <Title>Bem vindo, Paulo!</Title>
           <Subtitle>Qual curso você estuda?</Subtitle>
         </View>
+        <Separator text="Nível Superior" />
       </View>
     </>
   );
