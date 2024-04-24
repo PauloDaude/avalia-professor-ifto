@@ -1,6 +1,9 @@
-import { Text, View } from 'react-native';
 import Home from './src/screens/Home';
 import { loadFonts } from './src/font/fontCustom';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = loadFonts();
@@ -8,8 +11,13 @@ export default function App() {
     return null;
   }
   return (
-    <View className="flex-1 justify-center items-center">
-      <Home />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
