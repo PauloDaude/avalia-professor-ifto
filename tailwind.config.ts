@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        OpenSanslight: ['OpenSansLight'],
+        OpenSansLight: ['OpenSansLight'],
         OpenSansRegular: ['OpenSansRegular'],
         OpenSansSemiBold: ['OpenSansSemiBold'],
         OpenSansBold: ['OpenSansBold']
