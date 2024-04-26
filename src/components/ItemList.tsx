@@ -1,16 +1,25 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps
+} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Note from './Note';
 
-type ItemListProps = {
+interface ItemListProps extends TouchableOpacityProps {
   text: string;
   subText?: string;
   note?: number;
-};
+}
 
-const ItemList = ({ text, subText, note }: ItemListProps) => {
+const ItemList = ({ text, subText, note, ...rest }: ItemListProps) => {
   return (
-    <TouchableOpacity className="w-full items-start py-5 border-solid border-b border-[#5c5e601a]">
+    <TouchableOpacity
+      {...rest}
+      className="w-full items-start py-5 border-solid border-b border-[#5c5e601a]"
+      activeOpacity={0.4}
+    >
       {subText && (
         <Text className="font-OpenSansRegular text-[10px] text-secondary-black">
           {subText}
