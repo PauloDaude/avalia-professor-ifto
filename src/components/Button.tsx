@@ -21,9 +21,7 @@ const Button = ({ variant, text, ...rest }: IButton) => {
     >
       <View className="flex-row w-full items-center justify-center p-4 gap-4">
         {variant && <FontAwesome6 name="google" size={18} color="white" />}
-        <Text className="font-OpenSansBold text-white text-sm">
-          {variant ? 'Continuar com Google' : text}
-        </Text>
+        <Text className="font-OpenSansBold text-white text-sm">{text}</Text>
       </View>
     </TouchableOpacity>
   );
