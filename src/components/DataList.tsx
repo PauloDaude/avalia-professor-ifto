@@ -1,6 +1,9 @@
 import { View, FlatList } from 'react-native';
 import ItemList from './ItemList';
 import Loading from './Loading';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../Routes';
+import { NavigationProp } from '@react-navigation/native';
 
 interface IDataList {
   data: {
@@ -12,12 +15,18 @@ interface IDataList {
 }
 
 const DataList = ({ data, loading, loadMore }: IDataList) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const handleItemPress = () => {
+    navigation.navigate('Courses');
+  };
   return (
     <View className="flex-1 px-6">
       <FlatList
         data={data}
         keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => <ItemList text={item.name} />}
+        renderItem={({ item }) => (
+          <ItemList text={item.name} onPress={handleItemPress} />
+        )}
         onEndReached={loadMore}
         onEndReachedThreshold={0.1}
         ListFooterComponent={loading ? <Loading /> : null}
