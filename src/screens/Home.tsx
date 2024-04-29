@@ -1,41 +1,44 @@
-import { FlatList, View } from 'react-native';
+import { View } from 'react-native';
+import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 // import FocusedStatusBar from '../components/FocusedStatusBar';
 import { StatusBar } from 'react-native';
 import Title from '../components/Title';
 import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
-import ItemList from '../components/ItemList';
+import axios from 'axios';
+import DataList from '../components/DataList';
 
-interface IDataList {
+interface IData {
   id: string;
-  professor: string;
-  class: string;
-  note: number;
+  name: string;
 }
 
-const dataList: IDataList[] = [
-  {
-    id: '1',
-    professor: 'Prof. Lucas do Carmo Gonçalo',
-    class: 'Fundamentos da Matemática',
-    note: 28
-  },
-  {
-    id: '2',
-    professor: 'Prof. Lucas do Carmo Gonçalo',
-    class: 'Fundamentos da Matemática de são josé dos campos',
-    note: 6
-  },
-  {
-    id: '3',
-    professor: 'Prof. Lucas do Carmo Gonçalo',
-    class: 'Fundamentos da Matemática',
-    note: 6
-  }
-];
-
 const Home = () => {
+  const baseURL = 'https://rickandmortyapi.com/api';
+
+  const [data, setData] = useState<IData[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+
+  async function loadMore() {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const response = await axios.get(`${baseURL}/character?page=${page}`);
+      setData(prevData => [...prevData, ...response.data.results]);
+      setPage(prevPage => prevPage + 1);
+    } catch (error) {
+      console.log('Erro ao buscar os dados:', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadMore();
+  }, []);
+
   return (
     <>
       <StatusBar backgroundColor="#257C2E" />
@@ -46,19 +49,7 @@ const Home = () => {
           <Subtitle>Qual curso você estuda?</Subtitle>
         </View>
         <Separator text="Nível Superior" />
-        <View className="px-6">
-          <FlatList
-            data={dataList}
-            renderItem={({ item }) => (
-              <ItemList
-                text={item.class}
-                // subText={item.professor}
-                // note={item.note}
-              />
-            )}
-            keyExtractor={item => item.id}
-          />
-        </View>
+        <DataList data={data} loading={loading} loadMore={loadMore} />
       </View>
     </>
   );
