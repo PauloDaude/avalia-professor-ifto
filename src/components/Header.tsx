@@ -1,20 +1,52 @@
-import { View, Text } from 'react-native';
 import { Avatar, AvatarFallback, AvatarImage } from './Avatar';
-const Header = () => {
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+interface IHeader {
+  title: string;
+  subTitle: string;
+  showAvatar?: boolean;
+  showBack?: boolean;
+}
+
+const Header = ({
+  title,
+  subTitle,
+  showAvatar = false,
+  showBack = false
+}: IHeader) => {
+  const navigation = useNavigation();
+
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View className="flex-row w-full h-auto justify-between px-6 py-2 bg-primary-green items-center">
-      <View>
-        <Text className="font-OpenSansSemiBold text-xl text-primary-white">
-          Paulo Daúde
-        </Text>
-        <Text className="font-OpenSansLight text-sm text-primary-white leading-4">
-          Aluno
-        </Text>
+      <View className="flex-row items-center gap-4">
+        {showBack && (
+          <TouchableOpacity onPress={handleBack}>
+            <Ionicons name="arrow-back" size={20} color="white" />
+          </TouchableOpacity>
+        )}
+        <View>
+          <Text className="font-OpenSansSemiBold text-xl text-primary-white">
+            {title}
+          </Text>
+          <Text className="font-OpenSansLight text-sm text-primary-white leading-4">
+            {subTitle}
+          </Text>
+        </View>
       </View>
-      <Avatar className="w-10 h-10 ">
-        <AvatarImage source={{ uri: 'https://i.ibb.co/XWJ1ML0/unnamed.jpg' }} />
-        <AvatarFallback>PD</AvatarFallback>
-      </Avatar>
+      {showAvatar && (
+        <Avatar className="w-10 h-10 ">
+          <AvatarImage
+            source={{ uri: 'https://i.ibb.co/XWJ1ML0/unnamed.jpg' }}
+          />
+          <AvatarFallback>PD</AvatarFallback>
+        </Avatar>
+      )}
     </View>
   );
 };

@@ -43,7 +43,7 @@ const Home = () => {
     <>
       <StatusBar backgroundColor="#257C2E" />
       <View className="flex-1 bg-white">
-        <Header />
+        <Header title="Paulo Daúde" subTitle="Aluno" showAvatar={true} />
         <View className="p-6">
           <Title>Bem vindo, Paulo!</Title>
           <Subtitle>Qual curso você estuda?</Subtitle>
