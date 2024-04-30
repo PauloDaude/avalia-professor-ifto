@@ -1,0 +1,24 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Sistemas de Informação"
+    },
+    {
+      "id": 2,
+      "name": "Administração"
+    },
+    {
+      "id": 3,
+      "name": "Tecnologia em Alimentos"
+    },
+    {
+      "id": 4,
+      "name": "Licenciatura em Química"
+    },
+    {
+      "id": 5,
+      "name": "Licenciatura em Matemática"
+    }
+  ]
+}

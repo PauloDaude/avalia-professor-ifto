@@ -15,7 +15,7 @@ interface IData {
 }
 
 const Home = () => {
-  const baseURL = 'https://rickandmortyapi.com/api';
+  const baseURL = 'http://192.168.0.195:3000';
 
   const [data, setData] = useState<IData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -25,8 +25,9 @@ const Home = () => {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await axios.get(`${baseURL}/character?page=${page}`);
-      setData(prevData => [...prevData, ...response.data.results]);
+      const response = await axios.get(`${baseURL}/courses/?_page=${page}`);
+      console.log(response.data.data);
+      setData(prevData => [...prevData, ...response.data.data]);
       setPage(prevPage => prevPage + 1);
     } catch (error) {
       console.log('Erro ao buscar os dados:', error);
