@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
+import useDataList from '../hooks/useDataList';
 import Header from '../components/Header';
 // import FocusedStatusBar from '../components/FocusedStatusBar';
 import { StatusBar } from 'react-native';
@@ -8,7 +9,6 @@ import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
 import axios from 'axios';
 import DataList from '../components/DataList';
-
 interface IData {
   id: string;
   name: string;
@@ -17,28 +17,7 @@ interface IData {
 const Courses = () => {
   const baseURL = 'http://192.168.0.195:3000';
 
-  const [data, setData] = useState<IData[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(1);
-
-  async function loadMore() {
-    if (loading) return;
-    setLoading(true);
-    try {
-      const response = await axios.get(`${baseURL}/courses/?_page=${page}`);
-      console.log(response.data.data);
-      setData(prevData => [...prevData, ...response.data.data]);
-      setPage(prevPage => prevPage + 1);
-    } catch (error) {
-      console.log('Erro ao buscar os dados:', error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    loadMore();
-  }, []);
+  const { data, loading, fetchData } = useDataList<IData>(baseURL);
 
   return (
     <>
@@ -50,7 +29,7 @@ const Courses = () => {
           <Subtitle>Qual curso você estuda?</Subtitle>
         </View>
         <Separator text="Nível Superior" />
-        <DataList data={data} loading={loading} loadMore={loadMore} />
+        <DataList data={data} loading={loading} loadMore={fetchData} />
       </View>
     </>
   );
