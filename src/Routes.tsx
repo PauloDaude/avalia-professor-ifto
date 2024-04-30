@@ -1,12 +1,12 @@
-import Home from '../src/screens/Home';
+import Courses from './screens/Courses';
 import Login from '../src/screens/Login';
-import Courses from '../src/screens/Courses';
+import Classes from './screens/Classes';
 import { loadFonts } from '../src/styles/fontCustom';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
-  Home: undefined;
-  Courses: { itemName: string };
+  Courses: undefined;
+  Classes: { itemName: string };
   Login: undefined;
 };
 
@@ -19,12 +19,12 @@ export default function Routes() {
   }
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Courses"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Courses" component={Courses} />
+      <Stack.Screen name="Classes" component={Classes} />
     </Stack.Navigator>
   );
 }

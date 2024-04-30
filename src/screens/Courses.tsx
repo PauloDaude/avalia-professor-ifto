@@ -1,32 +1,56 @@
-import { View, Text, StatusBar } from 'react-native';
+import { View } from 'react-native';
+import { useEffect, useState } from 'react';
 import Header from '../components/Header';
+// import FocusedStatusBar from '../components/FocusedStatusBar';
+import { StatusBar } from 'react-native';
 import Title from '../components/Title';
 import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
+import axios from 'axios';
 import DataList from '../components/DataList';
-import { RouteProp } from '@react-navigation/native';
-import { RootStackParamList } from '../Routes';
 
-type CoursesRouteProp = RouteProp<RootStackParamList, 'Courses'>;
-
-interface CoursesProps {
-  route: CoursesRouteProp;
+interface IData {
+  id: string;
+  name: string;
 }
 
-const Courses = ({ route }: CoursesProps) => {
-  const { itemName } = route.params;
+const Courses = () => {
+  const baseURL = 'http://192.168.0.195:3000';
+
+  const [data, setData] = useState<IData[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+
+  async function loadMore() {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const response = await axios.get(`${baseURL}/courses/?_page=${page}`);
+      console.log(response.data.data);
+      setData(prevData => [...prevData, ...response.data.data]);
+      setPage(prevPage => prevPage + 1);
+    } catch (error) {
+      console.log('Erro ao buscar os dados:', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadMore();
+  }, []);
 
   return (
     <>
       <StatusBar backgroundColor="#257C2E" />
       <View className="flex-1 bg-white">
-        <Header title="Matérias do curso" subTitle={itemName} showBack={true} />
+        <Header title="Paulo Daúde" subTitle="Aluno" showAvatar={true} />
         <View className="p-6">
-          <Title>Escolha a disciplina</Title>
-          <Subtitle>Estão separadas por período</Subtitle>
+          <Title>Bem vindo, Paulo!</Title>
+          <Subtitle>Qual curso você estuda?</Subtitle>
         </View>
         <Separator text="Nível Superior" />
-        {/* <DataList data={data} loading={loading} loadMore={loadMore} /> */}
+        <DataList data={data} loading={loading} loadMore={loadMore} />
       </View>
     </>
   );

@@ -17,7 +17,7 @@ interface IDataList {
 const DataList = ({ data, loading, loadMore }: IDataList) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const handleItemPress = (itemName: string) => {
-    navigation.navigate('Courses', { itemName });
+    navigation.navigate('Classes', { itemName });
   };
   return (
     <View className="flex-1 px-6">
