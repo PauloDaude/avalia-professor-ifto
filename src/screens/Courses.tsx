@@ -4,17 +4,23 @@ import Title from '../components/Title';
 import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
 import DataList from '../components/DataList';
+import { RouteProp } from '@react-navigation/native';
+import { RootStackParamList } from '../Routes';
 
-const Courses = () => {
+type CoursesRouteProp = RouteProp<RootStackParamList, 'Courses'>;
+
+interface CoursesProps {
+  route: CoursesRouteProp;
+}
+
+const Courses = ({ route }: CoursesProps) => {
+  const { itemName } = route.params;
+
   return (
     <>
       <StatusBar backgroundColor="#257C2E" />
       <View className="flex-1 bg-white">
-        <Header
-          title="Matérias do curso"
-          subTitle="Sistemas de Informação"
-          showBack={true}
-        />
+        <Header title="Matérias do curso" subTitle={itemName} showBack={true} />
         <View className="p-6">
           <Title>Escolha a disciplina</Title>
           <Subtitle>Estão separadas por período</Subtitle>

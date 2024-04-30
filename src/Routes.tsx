@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   Home: undefined;
-  Courses: undefined;
+  Courses: { itemName: string };
   Login: undefined;
 };
 
