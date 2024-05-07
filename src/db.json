@@ -2,23 +2,109 @@
   "courses": [
     {
       "id": 1,
-      "name": "Sistemas de Informação"
+      "name": "Sistemas de Informação",
+      "classes": {
+        "period_one": [
+          {
+            "id": 1,
+            "class": "Fudamentos da Matemática",
+            "professor": "Prof. Lucas do Carmo Gonçalo"
+          },
+          {
+            "id": 2,
+            "class": "Introdução à Administração",
+            "professor": "Profa. Erna Augusta Denzin Schultz"
+          },
+          {
+            "id": 3,
+            "class": "Arquitetura e Organização de Computadores",
+            "professor": "Prof. Ivo Sócrates Moraes de Oliveira"
+          },
+          {
+            "id": 4,
+            "class": "Produção e Interpretação de Textos",
+            "professor": "Profa. Paula Jucá de Sousa"
+          },
+          {
+            "id": 5,
+            "period": 1,
+            "class": "Sociedade e Contemporaneidade",
+            "professor": "Profa. Thelma Valentina de Oliveira Fredrych"
+          },
+          {
+            "id": 6,
+            "class": "Algoritmos e Lógica de Programação",
+            "professor": "Prof. Edmundo Santos Seifert"
+          }
+        ],
+        "period_three": [
+          {
+            "id": 1,
+            "class": "Estrutura de Dados",
+            "professor": "Prof. Júlio César Pereira de Oliveira"
+          },
+          {
+            "id": 2,
+            "class": "Redes de Computadores II",
+            "professor": "Prof. Leandro Teófilo Pinto dos Reis"
+          },
+          {
+            "id": 3,
+            "class": "Linguagens e Técnicas de Programação II",
+            "professor": "Prof. Júlio César Pereira de Oliveira"
+          },
+          {
+            "id": 4,
+            "class": "Engenharia de Software I",
+            "professor": "Profa. Thatiane de Oliveira Rosa"
+          },
+          {
+            "id": 5,
+            "class": "Banco de Dados I",
+            "professor": "Prof. Camilo Carmo dos Santos"
+          }
+        ]
+      }
     },
     {
       "id": 2,
-      "name": "Administração"
+      "name": "Administração",
+      "classes": {
+        "period_one": {},
+        "period_three": {},
+        "period_five": {},
+        "period_seven": {}
+      }
     },
     {
       "id": 3,
-      "name": "Tecnologia em Alimentos"
+      "name": "Tecnologia em Alimentos",
+      "classes": {
+        "period_one": {},
+        "period_three": {},
+        "period_five": {},
+        "period_seven": {}
+      }
     },
     {
       "id": 4,
-      "name": "Licenciatura em Química"
+      "name": "Licenciatura em Química",
+      "classes": {
+        "period_one": {},
+        "period_three": {},
+        "period_five": {},
+        "period_seven": {}
+      }
     },
     {
       "id": 5,
-      "name": "Licenciatura em Matemática"
+      "name": "Licenciatura em Matemática",
+      "classes": {
+        "period_one": {},
+        "period_three": {},
+        "period_five": {},
+        "period_seven": {}
+      }
     }
   ]
 }
