@@ -4,12 +4,10 @@ import Loading from './Loading';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../Routes';
 import { NavigationProp } from '@react-navigation/native';
+import { ICourses } from '../hooks/useDataList';
 
 interface IDataList {
-  data: {
-    id: string | number;
-    name: string;
-  }[];
+  data: ICourses[];
   loading: boolean;
   loadMore: () => Promise<void>;
 }

@@ -1,8 +1,23 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+export interface ICourses {
+  id: string;
+  name: string;
+  classes: {
+    period_one: Class[];
+    period_three: Class[];
+    period_five: Class[];
+    period_seven: Class[];
+  };
+}
+interface Class {
+  id: number;
+  class: string;
+  professor: string;
+}
 
-const useDataList = <T>(baseURL: string) => {
-  const [data, setData] = useState<T[]>([]);
+const useDataList = (baseURL: string) => {
+  const [data, setData] = useState<ICourses[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
@@ -13,7 +28,6 @@ const useDataList = <T>(baseURL: string) => {
     try {
       const response = await axios.get(`${baseURL}/courses/?_page=${page}`);
       const newData = response.data.data;
-      console.log(newData);
       if (!newData) {
         setHasMore(false);
         return;

@@ -1,5 +1,4 @@
 import { View } from 'react-native';
-import { useEffect, useState } from 'react';
 import useDataList from '../hooks/useDataList';
 import Header from '../components/Header';
 // import FocusedStatusBar from '../components/FocusedStatusBar';
@@ -7,17 +6,12 @@ import { StatusBar } from 'react-native';
 import Title from '../components/Title';
 import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
-import axios from 'axios';
 import DataList from '../components/DataList';
-interface IData {
-  id: string;
-  name: string;
-}
 
 const Courses = () => {
   const baseURL = 'http://192.168.0.195:3000';
 
-  const { data, loading, fetchData } = useDataList<IData>(baseURL);
+  const { data, loading, fetchData } = useDataList(baseURL);
 
   return (
     <>
