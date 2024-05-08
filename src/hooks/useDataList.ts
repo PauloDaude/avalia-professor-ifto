@@ -4,13 +4,13 @@ export interface ICourses {
   id: string;
   name: string;
   classes: {
-    period_one: Class[];
-    period_three: Class[];
-    period_five: Class[];
-    period_seven: Class[];
+    period_one: IClass[];
+    period_three: IClass[];
+    period_five: IClass[];
+    period_seven: IClass[];
   };
 }
-interface Class {
+export interface IClass {
   id: number;
   class: string;
   professor: string;

@@ -3,14 +3,15 @@ import Login from '../src/screens/Login';
 import Classes from './screens/Classes';
 import { loadFonts } from '../src/styles/fontCustom';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ICourses } from './hooks/useDataList';
 
-export type RootStackParamList = {
+export type RoutesParams = {
   Courses: undefined;
-  Classes: { itemName: string };
+  Classes: { data: ICourses };
   Login: undefined;
 };
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RoutesParams>();
 
 export default function Routes() {
   const [fontsLoaded] = loadFonts();
