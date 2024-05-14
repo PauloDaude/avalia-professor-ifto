@@ -16,24 +16,23 @@ export interface IClass {
   professor: string;
 }
 
-const useDataList = (baseURL: string) => {
-  const [data, setData] = useState<ICourses[]>([]);
+export interface IQuestion {
+  id: number;
+  text: string;
+}
+
+const useDataList = <T>(baseURL: string) => {
+  const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(true);
-  const [page, setPage] = useState<number>(1);
 
   const fetchData = async () => {
-    if (loading || !hasMore) return;
+    if (loading) return;
     setLoading(true);
     try {
-      const response = await axios.get(`${baseURL}/courses/?_page=${page}`);
-      const newData = response.data.data;
-      if (!newData) {
-        setHasMore(false);
-        return;
-      }
+      const response = await axios.get(baseURL);
+      const newData = response.data;
+
       setData(prevData => [...prevData, ...newData]);
-      setPage(prevPage => prevPage + 1);
     } catch (error) {
       console.log('Erro ao buscar os dados:', error);
     } finally {
