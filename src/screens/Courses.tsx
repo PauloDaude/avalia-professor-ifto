@@ -13,13 +13,13 @@ import useDataList, { ICourses } from '../hooks/useDataList';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 const Courses = () => {
-  const baseURL = 'http://192.168.0.195:3000';
+  const baseURL = 'http://192.168.0.195:3000/courses';
 
-  const { data, loading, fetchData } = useDataList(baseURL);
+  const { data, loading } = useDataList<ICourses>(baseURL);
 
   const navigation = useNavigation<NavigationProp<RoutesParams>>();
-  const handleItemPress = (data: ICourses) => {
-    navigation.navigate('Classes', { data });
+  const handleItemPress = (dataParams: ICourses) => {
+    navigation.navigate('Classes', { dataParams });
   };
 
   return (
@@ -42,8 +42,6 @@ const Courses = () => {
                 onPress={() => handleItemPress(item)}
               />
             )}
-            onEndReached={fetchData}
-            onEndReachedThreshold={0.1}
             ListFooterComponent={loading ? <Loading /> : null}
           />
         </View>

@@ -21,19 +21,18 @@ interface ClassesProps {
 
 const Classes = ({ route }: ClassesProps) => {
   const navigation = useNavigation<NavigationProp<RoutesParams>>();
-  const handleItemPress = (data: ICourses) => {
-    navigation.navigate('Classes', { data });
+  const handleItemPress = (dataParams: any) => {
+    navigation.navigate('Questions', { dataParams });
   };
 
-  const { data } = route.params;
-  const periodsList: IClass[][] = Object.values(data.classes);
-  // console.log(Object.values(data.classes));
+  const { dataParams } = route.params;
+  const periodsList: IClass[][] = Object.values(dataParams.classes);
 
   const isVoidData = () => {
-    const teste = Object.values(data.classes).filter(test =>
+    const booleanList = Object.values(dataParams.classes).filter(test =>
       test.length !== 0 ? false : true
     );
-    if (teste.length === 0) {
+    if (booleanList.length === 0) {
       return true;
     }
     return false;
@@ -45,10 +44,10 @@ const Classes = ({ route }: ClassesProps) => {
       <View className="flex-1 bg-white">
         <Header
           title="Matérias do curso"
-          subTitle={data.name}
+          subTitle={dataParams.name}
           showBack={true}
         />
-        <View className="p-6 shadow-md">
+        <View className="p-6">
           <Title>Escolha a disciplina</Title>
           <Subtitle>Estão separadas por período</Subtitle>
         </View>
@@ -63,11 +62,7 @@ const Classes = ({ route }: ClassesProps) => {
               <View key={index}>
                 {period.length > 0 && (
                   <>
-                    <Separator
-                      text={`${
-                        (index + 1) % 2 == 0 ? index + 2 : index + 1
-                      }º Período`}
-                    />
+                    <Separator text={`${index * 2 + 1}º Período`} />
                     <View className="px-6">
                       <FlatList
                         data={period}
@@ -76,7 +71,7 @@ const Classes = ({ route }: ClassesProps) => {
                           <ItemList
                             text={item.class}
                             subText={item.professor}
-                            // onPress={() => handleItemPress(item)}
+                            onPress={() => handleItemPress(item)}
                           />
                         )}
                       />
