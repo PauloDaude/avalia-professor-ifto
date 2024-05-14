@@ -108,5 +108,31 @@
         "period_seven": {}
       }
     }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "text": "O docente apresentou seu plano de ensino (PLANEJAMENTO) no início do semestre ou ano letivo, indicando a ementa, competências e habilidades, recursos didáticos que serão utilizados, formas de avaliações, referências bibliográficas?"
+    },
+    {
+      "id": 2,
+      "text": "O docente apresenta uma POSTURA adequada ao cargo e responsabilidade que ocupa?"
+    },
+    {
+      "id": 3,
+      "text": "O docente é ASSÍDUO, ou seja, não falta às aulas e quando falta, apresenta justificativa e promove suas devidas reposições ou anteposições?"
+    },
+    {
+      "id": 4,
+      "text": "O docente é PONTUAL, ou seja, não chega atrasado ou libera a turma mais cedo?"
+    },
+    {
+      "id": 5,
+      "text": "O docente na REALIZAÇÃO de suas aulas procura contextualizar os conteúdos trabalhados; domina o conteúdo; possui fala (dicção) clara, coerente e fluente?"
+    },
+    {
+      "id": 6,
+      "text": "O docente nas AVALIAÇÕES mostra coerência entre o que foi ensinado e o que é exigido do estudante, entrega as avaliações e comenta os resultados, auxilia no processo de recuperação daqueles conteúdos não apreendidos?"
+    }
   ]
 }
