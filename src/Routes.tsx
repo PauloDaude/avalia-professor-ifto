@@ -1,13 +1,16 @@
 import Courses from './screens/Courses';
 import Login from '../src/screens/Login';
 import Classes from './screens/Classes';
-import { loadFonts } from '../src/styles/fontCustom';
+import Questions from './screens/Questions';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ICourses } from './hooks/useDataList';
+import { loadFonts } from '../src/styles/fontCustom';
 
 export type RoutesParams = {
   Courses: undefined;
-  Classes: { data: ICourses };
+  Classes: { dataParams: ICourses };
+  Questions: { dataParams: any };
   Login: undefined;
 };
 
@@ -26,6 +29,7 @@ export default function Routes() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Courses" component={Courses} />
       <Stack.Screen name="Classes" component={Classes} />
+      <Stack.Screen name="Questions" component={Questions} />
     </Stack.Navigator>
   );
 }
