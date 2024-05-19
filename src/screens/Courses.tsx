@@ -13,9 +13,9 @@ import useDataList, { ICourses } from '../hooks/useDataList';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 const Courses = () => {
-  const baseURL = 'http://192.168.0.195:3000/courses';
+  const baseURL = 'https://felipeoliveira.pythonanywhere.com/api/cursos';
 
-  const { data, loading } = useDataList<ICourses>(baseURL);
+  const { data, loading } = useDataList<ICourses>(baseURL, 'courses');
 
   const navigation = useNavigation<NavigationProp<RoutesParams>>();
   const handleItemPress = (dataParams: ICourses) => {

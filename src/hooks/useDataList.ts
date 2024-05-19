@@ -4,15 +4,20 @@ export interface ICourses {
   id: string;
   name: string;
   classes: {
-    period_one: IClass[];
-    period_three: IClass[];
-    period_five: IClass[];
-    period_seven: IClass[];
+    period_1: IClass[];
+    period_2: IClass[];
+    period_3: IClass[];
+    period_5: IClass[];
+    period_6: IClass[];
+    period_7: IClass[];
+    period_8: IClass[];
+    period_9: IClass[];
   };
 }
 export interface IClass {
   id: number;
   class: string;
+  id_professor: number;
   professor: string;
 }
 
@@ -21,7 +26,7 @@ export interface IQuestion {
   text: string;
 }
 
-const useDataList = <T>(baseURL: string) => {
+const useDataList = <T>(baseURL: string, name: string) => {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -30,7 +35,7 @@ const useDataList = <T>(baseURL: string) => {
     setLoading(true);
     try {
       const response = await axios.get(baseURL);
-      const newData = response.data;
+      const newData: T[] = response.data[name];
 
       setData(prevData => [...prevData, ...newData]);
     } catch (error) {
