@@ -5,7 +5,6 @@ import { RoutesParams } from '../Routes';
 import Title from '../components/Title';
 import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
-import useDataList, { IQuestion } from '../hooks/useDataList';
 import Question from '../components/Question';
 import { ScrollView } from 'react-native-virtualized-view';
 import Loading from '../components/Loading';
@@ -16,12 +15,36 @@ interface QuestionsProps {
   route: QuestionsRouteProp;
 }
 
-const Questions = ({ route }: QuestionsProps) => {
-  const baseURLQuestions = 'http://192.168.0.195:3000/questions';
+const questions = [
+  {
+    id: 1,
+    text: 'O docente apresentou seu plano de ensino (PLANEJAMENTO) no início do semestre ou ano letivo, indicando a ementa, competências e habilidades, recursos didáticos que serão utilizados, formas de avaliações, referências bibliográficas?'
+  },
+  {
+    id: 2,
+    text: 'O docente apresenta uma POSTURA adequada ao cargo e responsabilidade que ocupa?'
+  },
+  {
+    id: 3,
+    text: 'O docente é ASSÍDUO, ou seja, não falta às aulas e quando falta, apresenta justificativa e promove suas devidas reposições ou anteposições?'
+  },
+  {
+    id: 4,
+    text: 'O docente é PONTUAL, ou seja, não chega atrasado ou libera a turma mais cedo?'
+  },
+  {
+    id: 5,
+    text: 'O docente na REALIZAÇÃO de suas aulas procura contextualizar os conteúdos trabalhados; domina o conteúdo; possui fala (dicção) clara, coerente e fluente?'
+  },
+  {
+    id: 6,
+    text: 'O docente nas AVALIAÇÕES mostra coerência entre o que foi ensinado e o que é exigido do estudante, entrega as avaliações e comenta os resultados, auxilia no processo de recuperação daqueles conteúdos não apreendidos?'
+  }
+];
 
-  const { data: dataQuestions, loading } =
-    useDataList<IQuestion>(baseURLQuestions);
+const Questions = ({ route }: QuestionsProps) => {
   const { dataParams } = route.params;
+
   return (
     <>
       <StatusBar backgroundColor="#257C2E" />
@@ -37,10 +60,10 @@ const Questions = ({ route }: QuestionsProps) => {
               {dataParams.professor}
             </Text>
           </View>
-          {loading ? (
+          {!questions ? (
             <Loading />
           ) : (
-            dataQuestions.map((question, index: number) => (
+            questions.map((question, index: number) => (
               <View key={index}>
                 <Separator text={`Pergunta ${index + 1}*`} />
                 <View className="px-6 py-4">
