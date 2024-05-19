@@ -9,7 +9,7 @@ import Separator from '../components/Separator';
 
 import { RoutesParams } from '../Routes';
 import { RouteProp } from '@react-navigation/native';
-import { IClass, ICourses } from '../hooks/useDataList';
+import { IClass } from '../hooks/useDataList';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ItemList from '../components/ItemList';
 
@@ -38,6 +38,9 @@ const Classes = ({ route }: ClassesProps) => {
     return false;
   };
 
+  const currentMonth = new Date().getMonth();
+  const currentSemester: string = currentMonth <= 5 ? 'first' : 'second';
+
   return (
     <>
       <StatusBar backgroundColor="#257C2E" />
@@ -58,28 +61,41 @@ const Classes = ({ route }: ClassesProps) => {
                 Nenhuma matéria encontrada
               </Text>
             )}
-            {periodsList.map((period: IClass[], index: number) => (
-              <View key={index}>
-                {period.length > 0 && (
-                  <>
-                    <Separator text={`${index * 2 + 1}º Período`} />
-                    <View className="px-6">
-                      <FlatList
-                        data={period}
-                        keyExtractor={item => String(item.id)}
-                        renderItem={({ item }) => (
-                          <ItemList
-                            text={item.class}
-                            subText={item.professor}
-                            onPress={() => handleItemPress(item)}
-                          />
-                        )}
-                      />
-                    </View>
-                  </>
-                )}
-              </View>
-            ))}
+            {periodsList.map((period: IClass[], index: number) => {
+              const isOddIndex = (index + 1) % 2 !== 0;
+              const shouldRender =
+                (currentSemester === 'first' && isOddIndex) ||
+                (currentSemester === 'second' && !isOddIndex);
+              return (
+                <View key={index}>
+                  {shouldRender && (
+                    <>
+                      <Separator text={`${index + 1}º Período`} />
+                      {period.length === 0 && (
+                        <View className="px-6 py-4">
+                          <Text className="font-OpenSansRegular text-base text-[#9c9c9c]">
+                            Nenhuma matéria encontrada
+                          </Text>
+                        </View>
+                      )}
+                      <View className="px-6">
+                        <FlatList
+                          data={period}
+                          keyExtractor={item => String(item.id)}
+                          renderItem={({ item }) => (
+                            <ItemList
+                              text={item.class}
+                              subText={item.professor}
+                              onPress={() => handleItemPress(item)}
+                            />
+                          )}
+                        />
+                      </View>
+                    </>
+                  )}
+                </View>
+              );
+            })}
           </View>
         </ScrollView>
       </View>
