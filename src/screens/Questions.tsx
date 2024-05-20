@@ -1,13 +1,18 @@
-import { View, Text, StatusBar, FlatList } from 'react-native';
-import Header from '../components/Header';
-import { RouteProp } from '@react-navigation/native';
 import { RoutesParams } from '../Routes';
+import { useState } from 'react';
+
+import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
+import { ScrollView } from 'react-native-virtualized-view';
+
+import Header from '../components/Header';
 import Title from '../components/Title';
 import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
 import Question from '../components/Question';
-import { ScrollView } from 'react-native-virtualized-view';
 import Loading from '../components/Loading';
+import Button from '../components/Button';
+import { Checkbox } from '../components/Checkbox';
 
 type QuestionsRouteProp = RouteProp<RoutesParams, 'Questions'>;
 
@@ -43,6 +48,7 @@ const questions = [
 ];
 
 const Questions = ({ route }: QuestionsProps) => {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
   const { dataParams } = route.params;
 
   return (
@@ -72,6 +78,21 @@ const Questions = ({ route }: QuestionsProps) => {
               </View>
             ))
           )}
+          <Separator text="Fim das perguntas" />
+          <View className="px-6 py-4 gap-y-6">
+            <TouchableOpacity
+              onPress={() => setIsChecked(!isChecked)}
+              activeOpacity={0.7}
+            >
+              <View className="flex-row items-center">
+                <Checkbox isChecked={isChecked} />
+                <Text className="font-OpenSansRegular text-base leading-5 mx-4">
+                  Confirmo que respondi as perguntas de forma sincera
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <Button text="Enviar respostas" disabled={!isChecked} />
+          </View>
         </ScrollView>
       </View>
     </>
