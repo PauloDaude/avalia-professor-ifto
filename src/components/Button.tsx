@@ -11,12 +11,12 @@ interface IButton extends TouchableOpacityProps {
   text: string;
   variant?: 'login' | undefined;
   disabled?: boolean;
-  isLoading?: boolean;
+  isPending?: boolean;
 }
 
-const Button = ({ variant, text, disabled, isLoading, ...rest }: IButton) => {
+const Button = ({ variant, text, disabled, isPending, ...rest }: IButton) => {
   let bgColor =
-    disabled || isLoading
+    disabled || isPending
       ? 'bg-[#257c2e55]'
       : variant
       ? 'bg-[#4285F4]'
@@ -31,7 +31,7 @@ const Button = ({ variant, text, disabled, isLoading, ...rest }: IButton) => {
       <View className="flex-row w-full items-center justify-center p-4 gap-4">
         {variant && <FontAwesome6 name="google" size={18} color="white" />}
         <Text className="font-OpenSansBold text-white text-sm text-center justify-center items-center">
-          {isLoading ? <ActivityIndicator size={20} color="#257c2e" /> : text}
+          {isPending ? <ActivityIndicator size={20} color="#257c2e" /> : text}
         </Text>
       </View>
     </TouchableOpacity>

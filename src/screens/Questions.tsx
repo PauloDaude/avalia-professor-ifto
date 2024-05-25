@@ -58,7 +58,7 @@ const Questions = ({ route }: IQuestionsRoute) => {
 
   const { dataParams } = route.params;
 
-  const mutation = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: IFormData) => {
       return axios.post(
         'https://felipeoliveira.pythonanywhere.com/api/salvar_avaliacao',
@@ -84,7 +84,7 @@ const Questions = ({ route }: IQuestionsRoute) => {
       Nota5: formData[5],
       Nota6: formData[6]
     };
-    mutation.mutate(resultForm);
+    mutate(resultForm);
   };
   return (
     <>
@@ -135,7 +135,7 @@ const Questions = ({ route }: IQuestionsRoute) => {
             <Button
               text="Enviar respostas"
               disabled={!isChecked}
-              isLoading={mutation.status === 'pending'}
+              isPending={isPending}
               onPress={handleSubmitForm}
             />
           </View>
