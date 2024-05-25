@@ -9,9 +9,10 @@ import Separator from '../components/Separator';
 
 import { RoutesParams } from '../Routes';
 import { RouteProp } from '@react-navigation/native';
-import { IClass } from '../hooks/useDataList';
+import { IQuestionsScreen } from '../interfaces/screens';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ItemList from '../components/ItemList';
+import { IClass } from '../interfaces/interfaces';
 
 type ClassesRouteProp = RouteProp<RoutesParams, 'Classes'>;
 
@@ -21,7 +22,7 @@ interface ClassesProps {
 
 const Classes = ({ route }: ClassesProps) => {
   const navigation = useNavigation<NavigationProp<RoutesParams>>();
-  const handleItemPress = (dataParams: any) => {
+  const handleItemPress = (dataParams: IQuestionsScreen) => {
     navigation.navigate('Questions', { dataParams });
   };
 

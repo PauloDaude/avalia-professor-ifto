@@ -9,16 +9,17 @@ import Loading from '../components/Loading';
 import ItemList from '../components/ItemList';
 
 import { RoutesParams } from '../Routes';
-import useDataList, { ICourses } from '../hooks/useDataList';
+import useDataList from '../hooks/useDataList';
+import { IClassesScreen } from '../interfaces/screens';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 const Courses = () => {
   const baseURL = 'https://felipeoliveira.pythonanywhere.com/api/cursos';
 
-  const { data, loading } = useDataList<ICourses>(baseURL, 'courses');
+  const { data, loading } = useDataList<IClassesScreen>(baseURL, 'courses');
 
   const navigation = useNavigation<NavigationProp<RoutesParams>>();
-  const handleItemPress = (dataParams: ICourses) => {
+  const handleItemPress = (dataParams: IClassesScreen) => {
     navigation.navigate('Classes', { dataParams });
   };
 

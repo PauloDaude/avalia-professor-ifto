@@ -4,13 +4,13 @@ import Classes from './screens/Classes';
 import Questions from './screens/Questions';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ICourses } from './hooks/useDataList';
+import { IQuestionsScreen, IClassesScreen } from './interfaces/screens';
 import { loadFonts } from '../src/styles/fontCustom';
 
 export type RoutesParams = {
   Courses: undefined;
-  Classes: { dataParams: ICourses };
-  Questions: { dataParams: any };
+  Classes: { dataParams: IClassesScreen };
+  Questions: { dataParams: IQuestionsScreen };
   Login: undefined;
 };
 

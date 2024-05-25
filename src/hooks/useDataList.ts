@@ -1,30 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-export interface ICourses {
-  id: string;
-  name: string;
-  classes: {
-    period_1: IClass[];
-    period_2: IClass[];
-    period_3: IClass[];
-    period_5: IClass[];
-    period_6: IClass[];
-    period_7: IClass[];
-    period_8: IClass[];
-    period_9: IClass[];
-  };
-}
-export interface IClass {
-  id: number;
-  class: string;
-  id_professor: number;
-  professor: string;
-}
-
-export interface IQuestion {
-  id: number;
-  text: string;
-}
 
 const useDataList = <T>(baseURL: string, name: string) => {
   const [data, setData] = useState<T[]>([]);
