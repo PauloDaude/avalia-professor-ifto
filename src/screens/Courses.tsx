@@ -9,14 +9,18 @@ import Loading from '../components/Loading';
 import ItemList from '../components/ItemList';
 
 import { RoutesParams } from '../Routes';
-import useDataList from '../hooks/useDataList';
 import { IClassesScreen } from '../interfaces/screens';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const Courses = () => {
   const baseURL = 'https://felipeoliveira.pythonanywhere.com/api/cursos';
 
-  const { data, loading } = useDataList<IClassesScreen>(baseURL, 'courses');
+  const { data, isLoading } = useQuery<IClassesScreen[]>({
+    queryKey: ['get-courses'],
+    queryFn: () => axios.get(baseURL).then(response => response.data['courses'])
+  });
 
   const navigation = useNavigation<NavigationProp<RoutesParams>>();
   const handleItemPress = (dataParams: IClassesScreen) => {
@@ -43,7 +47,7 @@ const Courses = () => {
                 onPress={() => handleItemPress(item)}
               />
             )}
-            ListFooterComponent={loading ? <Loading /> : null}
+            ListFooterComponent={isLoading ? <Loading /> : null}
           />
         </View>
       </View>
