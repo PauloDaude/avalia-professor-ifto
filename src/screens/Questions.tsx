@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { RoutesParams } from '../Routes';
 import { useState } from 'react';
 
@@ -14,6 +15,7 @@ import Question from '../components/Question';
 import Loading from '../components/Loading';
 import Button from '../components/Button';
 import { Checkbox } from '../components/Checkbox';
+import axios from 'axios';
 
 type QuestionsRouteProp = RouteProp<RoutesParams, 'Questions'>;
 
@@ -49,10 +51,23 @@ const questions: IQuestion[] = [
 ];
 
 const Questions = ({ route }: IQuestionsRoute) => {
+  const queryClient = useQueryClient();
+
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [formData, setFormData] = useState<INote>({});
 
   const { dataParams } = route.params;
+
+  const mutation = useMutation({
+    mutationFn: (formData: IFormData) => {
+      return axios.post(
+        'https://felipeoliveira.pythonanywhere.com/api/salvar_avaliacao',
+        formData
+      );
+    },
+    onSuccess: () => console.log('Dados enviados com sucesso'),
+    onError: error => console.log('Algo deu errado:', error)
+  });
 
   const handleFormDataChange = (questionId: number, selectedOption: number) => {
     setFormData(prevState => ({ ...prevState, [questionId]: selectedOption }));
@@ -69,7 +84,7 @@ const Questions = ({ route }: IQuestionsRoute) => {
       Nota5: formData[5],
       Nota6: formData[6]
     };
-    console.log(resultForm);
+    mutation.mutate(resultForm);
   };
   return (
     <>
@@ -120,6 +135,7 @@ const Questions = ({ route }: IQuestionsRoute) => {
             <Button
               text="Enviar respostas"
               disabled={!isChecked}
+              isLoading={mutation.status === 'pending'}
               onPress={handleSubmitForm}
             />
           </View>
