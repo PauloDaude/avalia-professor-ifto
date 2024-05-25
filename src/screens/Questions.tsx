@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { ScrollView } from 'react-native-virtualized-view';
+import { INote, IFormData, IQuestion } from '../interfaces/interfaces';
 
 import Header from '../components/Header';
 import Title from '../components/Title';
@@ -16,11 +17,11 @@ import { Checkbox } from '../components/Checkbox';
 
 type QuestionsRouteProp = RouteProp<RoutesParams, 'Questions'>;
 
-interface QuestionsProps {
+interface IQuestionsRoute {
   route: QuestionsRouteProp;
 }
 
-const questions = [
+const questions: IQuestion[] = [
   {
     id: 1,
     text: 'O docente apresentou seu plano de ensino (PLANEJAMENTO) no início do semestre ou ano letivo, indicando a ementa, competências e habilidades, recursos didáticos que serão utilizados, formas de avaliações, referências bibliográficas?'
@@ -47,10 +48,29 @@ const questions = [
   }
 ];
 
-const Questions = ({ route }: QuestionsProps) => {
+const Questions = ({ route }: IQuestionsRoute) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [formData, setFormData] = useState<INote>({});
+
   const { dataParams } = route.params;
 
+  const handleFormDataChange = (questionId: number, selectedOption: number) => {
+    setFormData(prevState => ({ ...prevState, [questionId]: selectedOption }));
+  };
+
+  const handleSubmitForm = () => {
+    const resultForm: IFormData = {
+      IDMateria: dataParams.id,
+      IDProfessor: dataParams.id_professor,
+      Nota1: formData[1],
+      Nota2: formData[2],
+      Nota3: formData[3],
+      Nota4: formData[4],
+      Nota5: formData[5],
+      Nota6: formData[6]
+    };
+    console.log(resultForm);
+  };
   return (
     <>
       <StatusBar backgroundColor="#257C2E" />
@@ -73,7 +93,13 @@ const Questions = ({ route }: QuestionsProps) => {
               <View key={index}>
                 <Separator text={`Pergunta ${index + 1}*`} />
                 <View className="px-6 py-4">
-                  <Question question={question} />
+                  <Question
+                    question={question}
+                    selectedOption={formData[question.id]}
+                    onOptionSelect={(selectedOption: number) =>
+                      handleFormDataChange(question.id, selectedOption)
+                    }
+                  />
                 </View>
               </View>
             ))
@@ -91,7 +117,11 @@ const Questions = ({ route }: QuestionsProps) => {
                 </Text>
               </View>
             </TouchableOpacity>
-            <Button text="Enviar respostas" disabled={!isChecked} />
+            <Button
+              text="Enviar respostas"
+              disabled={!isChecked}
+              onPress={handleSubmitForm}
+            />
           </View>
         </ScrollView>
       </View>

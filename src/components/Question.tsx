@@ -1,15 +1,18 @@
-import { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { RadioButton } from 'react-native-paper';
-import { IQuestion } from '../hooks/useDataList';
+import { IQuestion } from '../interfaces/interfaces';
 
 interface IQuestionProps {
   question: IQuestion;
+  selectedOption?: number;
+  onOptionSelect: (selectedOption: number) => void;
 }
 
-const Question = ({ question }: IQuestionProps) => {
-  const [selectedOption, setSelectedOption] = useState<number>();
-
+const Question = ({
+  question,
+  selectedOption,
+  onOptionSelect
+}: IQuestionProps) => {
   const options = [
     { value: 1, text: '1 - Discordo Totalmente' },
     { value: 2, text: '2 - Discordo' },
@@ -31,7 +34,7 @@ const Question = ({ question }: IQuestionProps) => {
       <View className="w-full py-2">
         {options.map(option => (
           <TouchableOpacity
-            onPress={() => setSelectedOption(option.value)}
+            onPress={() => onOptionSelect(option.value)}
             activeOpacity={0.7}
             key={option.value}
           >
@@ -43,7 +46,7 @@ const Question = ({ question }: IQuestionProps) => {
                   selectedOption === option.value ? 'checked' : 'unchecked'
                 }
                 color="#257C2E"
-                onPress={() => setSelectedOption(option.value)}
+                onPress={() => onOptionSelect(option.value)}
               />
               <Text className="font-OpenSansRegular text-sm">
                 {option.text}
