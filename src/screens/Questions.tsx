@@ -90,7 +90,11 @@ const Questions = ({ route }: IQuestionsRoute) => {
     <>
       <StatusBar backgroundColor="#257C2E" />
       <View className="flex-1 bg-white">
-        <Header title="Avaliação" subTitle={dataParams.class} showBack={true} />
+        <Header
+          title="Avaliação"
+          subTitle={dataParams.class}
+          avatarURL="https://i.ibb.co/XWJ1ML0/unnamed.jpg"
+        />
         <View className="p-6">
           <Title>Responda todas as questões</Title>
           <Subtitle>De forma sincera</Subtitle>

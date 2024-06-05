@@ -49,7 +49,7 @@ const Classes = ({ route }: ClassesProps) => {
         <Header
           title="Matérias do curso"
           subTitle={dataParams.name}
-          showBack={true}
+          avatarURL="https://i.ibb.co/XWJ1ML0/unnamed.jpg"
         />
         <View className="p-6">
           <Title>Escolha a disciplina</Title>
