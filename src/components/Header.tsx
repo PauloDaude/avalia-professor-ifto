@@ -6,16 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 interface IHeader {
   title: string;
   subTitle: string;
-  showAvatar?: boolean;
+  avatarURL?: string;
   showBack?: boolean;
 }
 
-const Header = ({
-  title,
-  subTitle,
-  showAvatar = false,
-  showBack = false
-}: IHeader) => {
+const Header = ({ title, subTitle, avatarURL, showBack = false }: IHeader) => {
   const navigation = useNavigation();
 
   const handleBack = () => {
@@ -39,11 +34,9 @@ const Header = ({
           </Text>
         </View>
       </View>
-      {showAvatar && (
+      {!!avatarURL && (
         <Avatar className="w-10 h-10 ">
-          <AvatarImage
-            source={{ uri: 'https://i.ibb.co/XWJ1ML0/unnamed.jpg' }}
-          />
+          <AvatarImage source={{ uri: avatarURL }} />
           <AvatarFallback>PD</AvatarFallback>
         </Avatar>
       )}
