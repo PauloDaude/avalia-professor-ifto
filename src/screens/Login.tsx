@@ -1,5 +1,21 @@
-import { View, Text, StatusBar, ImageBackground, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar,
+  ImageBackground,
+  Image,
+  Linking,
+  ToastAndroid
+} from 'react-native';
 import Button from '../components/Button';
+
+const openUrl = async (url: string) => {
+  if (await Linking.canOpenURL(url)) {
+    await Linking.openURL(url);
+  } else {
+    ToastAndroid.show("Can't open this URL", ToastAndroid.SHORT);
+  }
+};
 
 const Login = () => {
   return (
@@ -28,6 +44,9 @@ const Login = () => {
             variant="login"
             text="Continuar com Google"
             className="mt-12"
+            onPress={() =>
+              openUrl('https://felipeoliveira.pythonanywhere.com/login')
+            }
           />
         </View>
         <Text className="text-base font-OpenSansLight text-secondary-black text-center mt-12 mb-4">

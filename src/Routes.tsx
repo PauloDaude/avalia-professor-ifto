@@ -8,7 +8,7 @@ import { IQuestionsScreen, IClassesScreen } from './interfaces/screens';
 import { loadFonts } from '../src/styles/fontCustom';
 import ClassesProfessor from './screens/HomeProfessor';
 import NotesProfessor from './screens/NotesProfessor';
-import { IClass, IResponseClasses } from './interfaces/interfaces';
+import { IResponseClasses } from './interfaces/interfaces';
 import FinalResults from './screens/FinalResults';
 
 export type RoutesParams = {
@@ -30,7 +30,7 @@ export default function Routes() {
   }
   return (
     <Stack.Navigator
-      initialRouteName="ClassesProfessor"
+      initialRouteName="Courses"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Login" component={Login} />
