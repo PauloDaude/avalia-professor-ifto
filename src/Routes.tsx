@@ -7,12 +7,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { IQuestionsScreen, IClassesScreen } from './interfaces/screens';
 import { loadFonts } from '../src/styles/fontCustom';
 import ClassesProfessor from './screens/HomeProfessor';
+import NotesProfessor from './screens/NotesProfessor';
+import { IClass, IResponseClasses } from './interfaces/interfaces';
 
 export type RoutesParams = {
   Courses: undefined;
   Classes: { dataParams: IClassesScreen };
   Questions: { dataParams: IQuestionsScreen };
   ClassesProfessor: undefined;
+  NotesProfessor: { classeName: IResponseClasses };
   Login: undefined;
 };
 
@@ -33,6 +36,7 @@ export default function Routes() {
       <Stack.Screen name="Classes" component={Classes} />
       <Stack.Screen name="Questions" component={Questions} />
       <Stack.Screen name="ClassesProfessor" component={ClassesProfessor} />
+      <Stack.Screen name="NotesProfessor" component={NotesProfessor} />
     </Stack.Navigator>
   );
 }

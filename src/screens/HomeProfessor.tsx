@@ -12,39 +12,40 @@ import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
 import Loading from '../components/Loading';
 import ItemList from '../components/ItemList';
-import { IClass } from '../interfaces/interfaces';
+import { IClass, IResponseClasses } from '../interfaces/interfaces';
 
 const dataProfessor = {
-  id: 2,
+  id: 4,
   name: 'Edmundo Santos Seifert',
   email: 'edmundo.seifert@ifto.edu.br',
   imageURL: 'https://i.ibb.co/FhPC4b6/edmundo-foto.webp'
 };
 
-const filterClasses = (response: AxiosResponse) => {
-  const professorsClasses = response.data['courses'];
-  return professorsClasses.flatMap((professorClass: IClassesScreen) => {
-    const classes = Object.values(professorClass.classes).flat();
-    return classes.filter(
-      (period: IClass) => period.id_professor === dataProfessor.id
-    );
-  });
+const filterClassesName = (response: AxiosResponse) => {
+  const data = response.data;
+  return {
+    idProfessor: data.id_professor,
+    classesNames: data.average_by_subject.map((classe: any) => classe.name)
+  } as IResponseClasses;
 };
 
 const ClassesProfessor = () => {
-  const baseURL = 'https://felipeoliveira.pythonanywhere.com/api/cursos';
+  const baseURL = 'https://felipeoliveira.pythonanywhere.com/api/resultados';
 
-  const { data, isLoading } = useQuery<IClass[]>({
+  const { data, isLoading } = useQuery<IResponseClasses>({
     queryKey: ['get-classes-professor'],
-    queryFn: () => axios.get(baseURL).then(response => filterClasses(response))
+    queryFn: () =>
+      axios
+        .get(`${baseURL}/${dataProfessor.id}`)
+        .then(response => filterClassesName(response))
   });
 
   console.log(data);
 
   const navigation = useNavigation<NavigationProp<RoutesParams>>();
-  // const handleItemPress = (dataParams: IClass) => {
-  //   navigation.navigate('', { dataParams });
-  // };
+  const handleItemPress = (classeName: IResponseClasses) => {
+    navigation.navigate('NotesProfessor', { classeName });
+  };
 
   return (
     <>
@@ -62,12 +63,17 @@ const ClassesProfessor = () => {
         <Separator text="Matérias" />
         <View className="px-6 pb-2">
           <FlatList
-            data={data}
-            keyExtractor={item => String(item.id)}
+            data={data?.classesNames}
+            keyExtractor={item => item}
             renderItem={({ item }) => (
               <ItemList
-                text={item.class}
-                // onPress={() => handleItemPress(item)}
+                text={item}
+                onPress={() =>
+                  handleItemPress({
+                    idProfessor: data!.idProfessor,
+                    classesNames: [item]
+                  })
+                }
               />
             )}
             ListFooterComponent={isLoading ? <Loading /> : null}

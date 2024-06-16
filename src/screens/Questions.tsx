@@ -23,7 +23,7 @@ interface IQuestionsRoute {
   route: QuestionsRouteProp;
 }
 
-const questions: IQuestion[] = [
+export const questionsList: IQuestion[] = [
   {
     id: 1,
     text: 'O docente apresentou seu plano de ensino (PLANEJAMENTO) no início do semestre ou ano letivo, indicando a ementa, competências e habilidades, recursos didáticos que serão utilizados, formas de avaliações, referências bibliográficas?'
@@ -94,6 +94,7 @@ const Questions = ({ route }: IQuestionsRoute) => {
           title="Avaliação"
           subTitle={dataParams.class}
           avatarURL="https://i.ibb.co/XWJ1ML0/unnamed.jpg"
+          showBack={true}
         />
         <View className="p-6">
           <Title>Responda todas as questões</Title>
@@ -105,10 +106,10 @@ const Questions = ({ route }: IQuestionsRoute) => {
               {dataParams.professor}
             </Text>
           </View>
-          {!questions ? (
+          {!questionsList ? (
             <Loading />
           ) : (
-            questions.map((question, index: number) => (
+            questionsList.map((question, index: number) => (
               <View key={index}>
                 <Separator text={`Pergunta ${index + 1}*`} />
                 <View className="px-6 py-4">

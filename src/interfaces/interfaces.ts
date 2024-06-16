@@ -23,20 +23,25 @@ export interface IFormData {
 
 export interface IAverageNotes {
   name: string;
-  media_nota1: number;
-  media_nota2: number;
-  media_nota3: number;
-  media_nota4: number;
-  media_nota5: number;
-  media_nota6: number;
-  media_total: number;
+  average_rating1: number;
+  average_rating2: number;
+  average_rating3: number;
+  average_rating4: number;
+  average_rating5: number;
+  average_rating6: number;
+  average_ratingF: number;
 }
 
 export interface IProfessorNotes {
   id_professor: number;
   professor: string;
-  media_por_materia: IAverageNotes;
-  media_das_medias: number;
+  average_by_subject: IAverageNotes[];
+  average_of_averages: number;
+}
+
+export interface IResponseClasses {
+  idProfessor: number;
+  classesNames: string[];
 }
 
 export interface INote {

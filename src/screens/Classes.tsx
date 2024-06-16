@@ -50,6 +50,7 @@ const Classes = ({ route }: ClassesProps) => {
           title="Matérias do curso"
           subTitle={dataParams.name}
           avatarURL="https://i.ibb.co/XWJ1ML0/unnamed.jpg"
+          showBack={true}
         />
         <View className="p-6">
           <Title>Escolha a disciplina</Title>
