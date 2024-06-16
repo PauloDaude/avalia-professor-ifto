@@ -20,7 +20,7 @@ const openUrl = async (url: string) => {
 const Login = () => {
   return (
     <ImageBackground
-      source={require('../assets/login-background-image.png')}
+      source={require('../../assets/login-background-image.png')}
       resizeMode="cover"
       className="flex-1"
     >
@@ -28,7 +28,7 @@ const Login = () => {
       <View className="flex-1 mt-6">
         <View className="w-full items-center mt-10">
           <Image
-            source={require('../assets/logo-colorida-vertical.png')}
+            source={require('../../assets/logo-colorida-vertical.png')}
             className="max-w-[152px] max-h-[182px]"
           />
         </View>
