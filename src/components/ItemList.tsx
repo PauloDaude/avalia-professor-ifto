@@ -10,7 +10,7 @@ import Note from './Note';
 interface ItemListProps extends TouchableOpacityProps {
   text: string;
   subText?: string;
-  note?: number;
+  note?: number | string;
 }
 
 const ItemList = ({ text, subText, note, ...rest }: ItemListProps) => {

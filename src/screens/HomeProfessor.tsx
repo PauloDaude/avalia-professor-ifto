@@ -3,7 +3,6 @@ import { FlatList, View, StatusBar } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
 import { RoutesParams } from '../Routes';
-import { IClassesScreen } from '../interfaces/screens';
 import axios, { AxiosResponse } from 'axios';
 
 import Header from '../components/Header';
@@ -12,7 +11,7 @@ import Subtitle from '../components/Subtitle';
 import Separator from '../components/Separator';
 import Loading from '../components/Loading';
 import ItemList from '../components/ItemList';
-import { IClass, IResponseClasses } from '../interfaces/interfaces';
+import { IResponseClasses } from '../interfaces/interfaces';
 
 const dataProfessor = {
   id: 4,
@@ -45,6 +44,10 @@ const ClassesProfessor = () => {
   const navigation = useNavigation<NavigationProp<RoutesParams>>();
   const handleItemPress = (classeName: IResponseClasses) => {
     navigation.navigate('NotesProfessor', { classeName });
+  };
+
+  const handleResultPress = (dataProfessor: any) => {
+    navigation.navigate('FinalResults', { dataProfessor });
   };
 
   return (
@@ -81,7 +84,10 @@ const ClassesProfessor = () => {
         </View>
         <Separator text="Pontuação final" />
         <View className="px-6">
-          <ItemList text="Resultados finais" onPress={() => {}} />
+          <ItemList
+            text="Resultados finais"
+            onPress={() => handleResultPress(dataProfessor)}
+          />
         </View>
       </View>
     </>

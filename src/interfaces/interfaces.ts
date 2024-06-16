@@ -44,6 +44,16 @@ export interface IResponseClasses {
   classesNames: string[];
 }
 
+interface IResponseFinalClasses {
+  name: string;
+  averageFinal: number;
+}
+export interface IResponseFinalResults {
+  idProfessor: number;
+  classesNames: IResponseFinalClasses[];
+  averageGeneral: number;
+}
+
 export interface INote {
   [key: number]: number;
 }

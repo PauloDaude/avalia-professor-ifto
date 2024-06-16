@@ -9,12 +9,7 @@ import Separator from '../components/Separator';
 
 import { RoutesParams } from '../Routes';
 import { RouteProp } from '@react-navigation/native';
-import {
-  IAverageNotes,
-  IClass,
-  IProfessorNotes,
-  IResponseClasses
-} from '../interfaces/interfaces';
+import { IAverageNotes, IResponseClasses } from '../interfaces/interfaces';
 import { questionsList } from './Questions';
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
@@ -88,6 +83,8 @@ const NotesProfessor = ({ route }: NotesProfessorProps) => {
     enabled: false
   });
 
+  console.log(data);
+
   useEffect(() => {
     refetch();
   }, [classeName, refetch]);
@@ -114,9 +111,24 @@ const NotesProfessor = ({ route }: NotesProfessorProps) => {
           showBack={true}
         />
         <View className="p-6">
-          <Title>Escolha a disciplina</Title>
-          <Subtitle>Estão separadas por período</Subtitle>
+          <Title>Resultado das avaliações</Title>
+          <Subtitle>Turma de 2024/1</Subtitle>
         </View>
+        {shouldRender && (
+          <View className="px-6 py-4 bg-[#EEEFF1]">
+            <View className="flex-row justify-between">
+              <Text className="font-OpenSansRegular text-base">
+                Pontuação final da matéria:
+              </Text>
+              <Note
+                number={(data as IAverageNotes).average_ratingF.toFixed(1)}
+              ></Note>
+            </View>
+            <Text className="font-OpenSansRegular text-xs w-[80%] text-secondary-black">
+              Obs: O cálculo é a somatória das médias dividido por dois
+            </Text>
+          </View>
+        )}
         <ScrollView>
           <View className="flex-1">
             <Separator text={'Perguntas da avaliação'} />
