@@ -10,13 +10,15 @@ import ClassesProfessor from './screens/HomeProfessor';
 import NotesProfessor from './screens/NotesProfessor';
 import { IResponseClasses } from './interfaces/interfaces';
 import FinalResults from './screens/FinalResults';
+import HomeManager from './screens/HomeManager';
 
 export type RoutesParams = {
   Courses: undefined;
   Classes: { dataParams: IClassesScreen };
   Questions: { dataParams: IQuestionsScreen };
-  ClassesProfessor: undefined;
+  ClassesProfessor: { idProfessor: number };
   NotesProfessor: { classeName: IResponseClasses };
+  HomeManager: undefined;
   FinalResults: { dataProfessor: any };
   Login: undefined;
 };
@@ -30,7 +32,7 @@ export default function Routes() {
   }
   return (
     <Stack.Navigator
-      initialRouteName="Courses"
+      initialRouteName="HomeManager"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Login" component={Login} />
@@ -39,6 +41,7 @@ export default function Routes() {
       <Stack.Screen name="Questions" component={Questions} />
       <Stack.Screen name="ClassesProfessor" component={ClassesProfessor} />
       <Stack.Screen name="NotesProfessor" component={NotesProfessor} />
+      <Stack.Screen name="HomeManager" component={HomeManager} />
       <Stack.Screen name="FinalResults" component={FinalResults} />
     </Stack.Navigator>
   );

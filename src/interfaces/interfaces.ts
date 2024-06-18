@@ -42,6 +42,7 @@ export interface IProfessorNotes {
 export interface IResponseClasses {
   idProfessor: number;
   classesNames: string[];
+  nameProfessor?: string;
 }
 
 interface IResponseFinalClasses {

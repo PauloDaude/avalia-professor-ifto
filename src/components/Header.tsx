@@ -36,8 +36,8 @@ const Header = ({ title, subTitle, avatarURL, showBack = false }: IHeader) => {
       </View>
       {!!avatarURL && (
         <Avatar className="w-10 h-10">
-          <AvatarImage source={{ uri: avatarURL }} />
-          <AvatarFallback>PD</AvatarFallback>
+          {/* <AvatarImage source={{ uri: avatarURL }} /> */}
+          <AvatarFallback>JN</AvatarFallback>
         </Avatar>
       )}
     </View>

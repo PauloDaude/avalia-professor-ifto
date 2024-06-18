@@ -20,7 +20,7 @@ const openUrl = async (url: string) => {
 const Login = () => {
   return (
     <ImageBackground
-      source={require('../../assets/login-background-image.png')}
+      source={require('../../assets/login-background-image.jpeg')}
       resizeMode="cover"
       className="flex-1"
     >
